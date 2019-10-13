@@ -1,3 +1,7 @@
-const api = () => {};
+const express = require("express");
+const router = express.Router();
+const controllers = require("../controller");
 
-module.exports = api;
+router.post("/registration", controllers.registration);
+
+module.exports = router;

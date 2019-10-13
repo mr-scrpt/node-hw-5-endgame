@@ -1,1 +1,1 @@
-module.exports.registrationUser = require("./registrationUser");
+module.exports.registration = require("./registration");
