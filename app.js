@@ -1,8 +1,10 @@
+require("dotenv").config();
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
 //const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+require("./models");
 
 const app = express();
 
@@ -12,7 +14,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-app.use("/api", require("./api"));
+app.use("/api/v1.0", require("./routes/api/v1.0"));
 
 app.use("*", (req, res) => {
   res.sendFile(path.resolve(process.cwd(), "public/index.html"));

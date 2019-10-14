@@ -1,5 +1,3 @@
-const registration = (req, res) => {
-  console.log(req.body);
+module.exports = (req, res) => {
+  console.log("registration");
 };
-
-module.exports = registration;
