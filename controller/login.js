@@ -10,9 +10,11 @@ module.exports = async (req, res) => {
       const userSerialized = serializedUser(user);
       res.json(userSerialized);
     } else {
-      res.status(400).json({ status: 400, message: "Пользователь не найден!" });
+      res
+        .status(400)
+        .json({ status: 400, message: "Логин или пароль неверен!" });
     }
   } catch (e) {
-    res.json({ status: 400, message: "Ошибка логина!" });
+    res.status(400).json({ status: 400, message: "Логин или пароль неверен!" });
   }
 };
