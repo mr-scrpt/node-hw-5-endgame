@@ -20,6 +20,7 @@ passport.use(
   new LocalStrategy(
     { usernameField: "username", passReqToCallback: true },
     (req, username, password, done) => {
+      console.log("В стратегии");
       try {
         const user = Users.findOne({ username });
         if (!user) {
