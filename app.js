@@ -7,7 +7,6 @@ const helmet = require("helmet");
 //const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 require("./models");
-require("./config/config-passport");
 
 const app = express();
 app.use(helmet());
@@ -47,6 +46,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
+
   res.json({
     message: err.message,
     error: err

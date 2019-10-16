@@ -1,5 +1,6 @@
 const db = require("../models/db");
 const { setCrypto } = require("../lib/crypto");
+const serializedUser = require("../lib/serializedUser");
 module.exports = async (req, res) => {
   const { username } = req.body;
 
@@ -11,9 +12,13 @@ module.exports = async (req, res) => {
     } else {
       const data = req.body;
       data.password = setCrypto(req.body.password);
-      const result = await db.userAdd(data);
-      ///const { password, ...serialized } = result;  <== Сеарилизация пользователя, удалить пароль
-      res.json(result);
+
+      const user = await db.userAdd(data);
+
+      //Сериализация
+      const userSerialized = serializedUser(user);
+
+      res.json(user);
     }
   } catch (e) {
     console.log(e.message);
