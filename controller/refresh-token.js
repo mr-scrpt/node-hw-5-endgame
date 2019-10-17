@@ -1,5 +1,5 @@
 const tokenGenerator = require("../lib/tokenGenerator");
-const tokenDecoder = require("../lib/tokenDecode");
+const tokenDecoder = require("../lib/tokenDecoder");
 
 const secretRefresh = process.env.token_refresh_secret;
 const lifeMain = process.env.token_main_life;
@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
   const refreshToken = req.headers["authorization"];
 
   try {
-    decode = await tokenDecoder(refreshToken, secretRefresh);
+    const decode = await tokenDecoder(refreshToken, secretRefresh);
     const { username, _id: id } = decode;
     const user = { username, id };
 

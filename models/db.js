@@ -24,8 +24,12 @@ module.exports.userAdd = ({
   return User.save();
 };
 
-module.exports.userGetOne = username => {
+module.exports.userGetOneByUserName = username => {
   return Users.findOne({ username });
+};
+
+module.exports.userGetOneById = id => {
+  return Users.findOne({ _id: id });
 };
 
 module.exports.userGetAll = () => {
