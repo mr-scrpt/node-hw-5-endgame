@@ -8,6 +8,8 @@ module.exports = async (req, res) => {
     const etalonPassword = user.password;
     if (validCrypto(password, etalonPassword)) {
       const userSerialized = serializedUser(user);
+      console.log(userSerialized);
+
       res.json(userSerialized);
     } else {
       res

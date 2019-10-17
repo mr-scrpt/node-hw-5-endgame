@@ -18,8 +18,8 @@ module.exports = async (req, res) => {
     res.json({
       accessToken: token,
       refreshToken: refreshToken,
-      accessTokenExpiredAt: lifeMain,
-      refreshTokenExpiredAt: lifeRefresh
+      accessTokenExpiredAt: Date.now() + lifeMain * 1000,
+      refreshTokenExpiredAt: Date.now() + lifeRefresh * 1000
     });
   } catch (e) {
     res.status(400).json({ status: 400, message: "Неудалось обновить токен" });
