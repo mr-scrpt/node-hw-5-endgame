@@ -12,11 +12,11 @@ module.exports = async (req, res) => {
     const user = await tokenDecoder(refreshToken, secretRefresh);
 
     const userSerialized = serializedUser(user);
-    const { token, refreshTokenNew } = tokenGenerator(userSerialized);
+    const tokens = tokenGenerator(userSerialized);
 
     res.json({
-      accessToken: token,
-      refreshToken: refreshTokenNew,
+      accessToken: tokens.token,
+      refreshToken: tokens.refreshToken,
       accessTokenExpiredAt: Date.now() + lifeMain * 1000,
       refreshTokenExpiredAt: Date.now() + lifeRefresh * 1000
     });

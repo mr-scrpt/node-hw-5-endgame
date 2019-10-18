@@ -14,6 +14,9 @@ module.exports = async (req, res) => {
       const userSerialized = serializedUser(user);
       const { token, refreshToken } = tokenGenerator(userSerialized);
       const tokenData = tokenSetData(token, refreshToken);
+      /* console.log(token);
+      console.log("========================================");
+      console.log(refreshToken); */
 
       res.json({ ...userSerialized, ...tokenData });
     } else {
