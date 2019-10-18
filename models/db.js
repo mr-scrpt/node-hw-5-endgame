@@ -24,6 +24,20 @@ module.exports.userAdd = ({
   return User.save();
 };
 
+module.exports.userChange = user => {
+  console.log(user.id);
+
+  return Users.findByIdAndUpdate(
+    {
+      _id: user.id
+    },
+    {
+      $set: user
+    },
+    { new: true }
+  );
+};
+
 module.exports.userGetOneByUserName = username => {
   return Users.findOne({ username });
 };

@@ -6,13 +6,16 @@ const path = require("path");
 const helmet = require("helmet");
 //const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+//const bodyParser = require("body-parser");
+const multer = require("multer");
 require("./models");
 
 const app = express();
 app.use(helmet());
 app.use(logger("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+//app.use(multer({ dest: "./uploads/" }).single("avatar"));
+//app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");

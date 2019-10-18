@@ -1,14 +1,16 @@
 const tokenDecoder = require("../lib/tokenDecoder");
-const secretRefresh = process.env.token_refresh_secret;
-const lifeMain = process.env.token_main_life;
-const lifeRefresh = process.env.token_refresh_life;
+const secretToken = process.env.token_main_secret;
+
 const db = require("../models/db");
 
 module.exports = async (req, res) => {
-  const refreshToken = req.headers["authorization"];
+  const accessToken = req.headers["authorization"];
 
   try {
-    const decode = await tokenDecoder(refreshToken, secretRefresh);
+    const decode = await tokenDecoder(accessToken, secretToken);
+    //console.log(decode);
+
+    res.json(decode);
   } catch (e) {
     console.error(e.message);
   }

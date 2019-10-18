@@ -9,14 +9,11 @@ module.exports = async (req, res) => {
   try {
     const user = await db.userGetOneByUserName(username);
     const etalonPassword = user.password;
+
     if (validCrypto(password, etalonPassword)) {
-      const { token, refreshToken } = tokenGenerator(user);
-
-      console.log(token);
-
-      const tokenData = tokenSetData(token, refreshToken);
-
       const userSerialized = serializedUser(user);
+      const { token, refreshToken } = tokenGenerator(userSerialized);
+      const tokenData = tokenSetData(token, refreshToken);
 
       res.json({ ...userSerialized, ...tokenData });
     } else {
