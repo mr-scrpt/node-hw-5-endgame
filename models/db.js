@@ -74,3 +74,19 @@ module.exports.newsAdd = (data, user) => {
   });
   return NewsOne.save();
 };
+
+module.exports.newsGetOneById = id => {
+  return News.findOne({ _id: id });
+};
+
+module.exports.newsChange = news => {
+  return Users.findByIdAndUpdate(
+    {
+      _id: news.id
+    },
+    {
+      $set: news
+    },
+    { new: true }
+  );
+};

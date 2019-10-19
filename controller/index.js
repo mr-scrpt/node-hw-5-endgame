@@ -6,3 +6,4 @@ module.exports.profilePatch = require("./profilePatch");
 module.exports.userDelete = require("./userDelete");
 module.exports.newsGet = require("./newsGet");
 module.exports.newsPost = require("./newsPost");
+module.exports.newsPatch = require("./newsPatch");
