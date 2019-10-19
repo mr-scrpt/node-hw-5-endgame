@@ -21,7 +21,7 @@ const userSchema = new Schema(
       type: String,
       required: [true, "Пароль"]
     },
-    avatar: {
+    image: {
       type: String
     },
     permission: {

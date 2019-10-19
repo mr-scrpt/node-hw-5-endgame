@@ -1,34 +1,40 @@
 const tokenDecoder = require("../lib/tokenDecoder");
 const secretToken = process.env.token_main_secret;
 const db = require("../models/db");
+const userChanger = require("../lib/userChanger");
 module.exports = async (req, res) => {
   const accessToken = req.headers["authorization"];
-  console.log(333333);
-  console.log(accessToken);
-
   try {
     const userDecode = await tokenDecoder(accessToken, secretToken);
-    console.log(userDecode);
 
     const userId = userDecode.id;
     const currentUser = await db.userGetOneById(userId);
 
-    const data = req.body;
-    const avaPath = `//${req.get("host")}/${req.filePath}`;
+    const changedData = req.body;
+    changedData.image = req.filePath
+      ? `//${req.get("host")}/${req.filePath}`
+      : null;
+    const changedUser = userChanger(currentUser, changedData);
+
+    //console.log(changedUser);
+
+    /* const avaPath = `//${req.get("host")}/${req.filePath}`;
     let avaUrl = req.filePath
       ? `//${req.get("host")}/${req.filePath}`
-      : "/assets/img/no-user-image-big.png";
+      : "/assets/img/no-user-image-big.png"; */
 
-    const userChanged = {
-      firstName: data.firstName || currentUser.firstName,
-      id: currentUser.id,
-      image: data.image || avaUrl,
-      middleName: data.middleName || currentUser.middleName,
-      permission: data.permission || currentUser.permission,
-      surName: data.surName || currentUser.surName,
-      username: data.username || currentUser.username
-    };
-    const userUpdate = await db.userChange(userChanged);
+    /*  const userChanged = {
+      firstName: changedData.firstName || currentUser.firstName,
+      id: currentUser._id,
+      image: changedData.image || avaUrl,
+      middleName: changedData.middleName || currentUser.middleName,
+      permission: changedData.permission || currentUser.permission,
+      surName: changedData.surName || currentUser.surName,
+      username: changedData.username || currentUser.username
+    }; */
+
+    const userUpdate = await db.userChange(changedUser);
+    console.log(userUpdate);
 
     res.json(userUpdate);
   } catch (e) {

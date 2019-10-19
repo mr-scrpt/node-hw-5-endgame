@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
     const data = req.body;
 
     data.password = setCrypto(req.body.password);
-
+    data.image = "/assets/img/no-user-image-big.png";
     const userAdd = await db.userAdd(data);
     const userSerialized = serializedUser(userAdd);
     res.json(userSerialized);

@@ -6,6 +6,7 @@ module.exports.userAdd = ({
   username,
   firstName,
   middleName,
+  image,
   surName,
   password
 }) => {
@@ -13,6 +14,7 @@ module.exports.userAdd = ({
     username,
     firstName,
     middleName,
+    image,
     surName,
     password,
     permission: {
