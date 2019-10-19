@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const { Users, News } = require("./schema/user");
+const { Users } = require("./schema/user");
+const { News } = require("./schema/news");
 
 module.exports.userAdd = ({
   username,
@@ -56,4 +57,20 @@ module.exports.userDelete = id => {
 
 module.exports.newsGetAll = () => {
   return News.find();
+};
+
+module.exports.newsAdd = (data, user) => {
+  const NewsOne = new News({
+    created_at: Date.now(),
+    text: data.text,
+    title: data.title,
+    user: {
+      firstName: data.text,
+      id: data.text,
+      image: data.text,
+      middleName: data.text,
+      username: data.text
+    }
+  });
+  return NewsOne.save();
 };
