@@ -49,3 +49,6 @@ module.exports.userGetOneById = id => {
 module.exports.userGetAll = () => {
   return Users.find();
 };
+module.exports.userDelete = id => {
+  return Users.findByIdAndRemove({ _id: id });
+};

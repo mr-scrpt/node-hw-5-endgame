@@ -11,25 +11,16 @@ module.exports = async (req, res) => {
     const user = await db.userGetOneByUserName(username);
 
     if (user) {
-      res.status(400).json({ status: 400, message: "Ник занят!" });
-    } else {
-      const data = req.body;
-
-      data.password = setCrypto(req.body.password);
-
-      const user = await db.userAdd(data);
-
-      const { token, refreshToken } = tokenGenerator(user);
-
-      const tokenData = tokenSetData(token, refreshToken);
-
-      //Сериализация
-      const userSerialized = serializedUser(user);
-
-      console.log({ ...userSerialized, ...tokenData });
-
-      res.json({ ...userSerialized, ...tokenData });
+      return res.status(400).json({ status: 400, message: "Ник занят!" });
     }
+
+    const data = req.body;
+
+    data.password = setCrypto(req.body.password);
+
+    const userAdd = await db.userAdd(data);
+    const userSerialized = serializedUser(userAdd);
+    res.json(userSerialized);
   } catch (e) {
     console.log(e.message);
 
