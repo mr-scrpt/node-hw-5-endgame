@@ -25,6 +25,7 @@ module.exports = async (req, res) => {
         .json({ status: 400, message: "Логин или пароль неверен!" });
     }
   } catch (e) {
+    console.log(e.message);
     res.status(400).json({ status: 400, message: "Логин или пароль неверен!" });
   }
 };

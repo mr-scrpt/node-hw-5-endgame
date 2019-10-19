@@ -24,6 +24,6 @@ module.exports = async (req, res) => {
   } catch (e) {
     console.log(e.message);
 
-    throw new Error({ status: 500, message: e.message });
+    res.status(400).json({ status: 400, message: "Ошибка при регистрации" });
   }
 };

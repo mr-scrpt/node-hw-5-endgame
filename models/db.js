@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { Users } = require("./schema/user");
+const { Users, News } = require("./schema/user");
 
 module.exports.userAdd = ({
   username,
@@ -49,6 +49,11 @@ module.exports.userGetOneById = id => {
 module.exports.userGetAll = () => {
   return Users.find();
 };
+
 module.exports.userDelete = id => {
   return Users.findByIdAndRemove({ _id: id });
+};
+
+module.exports.newsGetAll = () => {
+  return News.find();
 };
