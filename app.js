@@ -7,7 +7,6 @@ const helmet = require("helmet");
 //const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 
-const multer = require("multer");
 require("./models");
 
 const app = express();

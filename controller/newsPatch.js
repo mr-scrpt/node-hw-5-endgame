@@ -4,15 +4,20 @@ const newPatch = async (req, res) => {
 
   if (id) {
     const { text, title } = req.body;
-    console.log(title, text);
+
     const news = { id: id, text, title };
     console.log(news);
 
     try {
-      //const news = await db.newsGetOneById(id);
       const changedNews = await db.newsChange(news);
-      console.log(changedNews);
-    } catch (e) {}
+      const allNews = await db.newsGetAll();
+      res.json(allNews);
+    } catch (e) {
+      console.log(e);
+      res
+        .status(400)
+        .json({ status: 400, message: "Неудалось изменить новость!" });
+    }
   }
 };
 

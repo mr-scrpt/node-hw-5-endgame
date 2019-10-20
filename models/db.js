@@ -90,3 +90,7 @@ module.exports.newsChange = news => {
     { new: true }
   );
 };
+
+module.exports.newsDelete = id => {
+  return News.findByIdAndRemove({ _id: id });
+};
