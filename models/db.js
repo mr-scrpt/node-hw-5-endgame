@@ -28,8 +28,6 @@ module.exports.userAdd = ({
 };
 
 module.exports.userChange = user => {
-  console.log(user.id);
-
   return Users.findByIdAndUpdate(
     {
       _id: user.id
@@ -67,11 +65,11 @@ module.exports.newsAdd = (data, user) => {
     text: data.text,
     title: data.title,
     user: {
-      firstName: data.text,
-      id: data.text,
-      image: data.text,
-      middleName: data.text,
-      username: data.text
+      firstName: user.firstName || "",
+      id: user.id,
+      image: user.image,
+      middleName: user.middleName || "",
+      username: user.username
     }
   });
   return NewsOne.save();
@@ -82,7 +80,7 @@ module.exports.newsGetOneById = id => {
 };
 
 module.exports.newsChange = news => {
-  return Users.findByIdAndUpdate(
+  return News.findByIdAndUpdate(
     {
       _id: news.id
     },
