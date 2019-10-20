@@ -1,12 +1,11 @@
 const db = require("../models/db");
-
+const serializedUser = require("../lib/serializedUser");
 const userGet = async (req, res) => {
-  console.log(2222222);
-
   try {
     const users = await db.userGetAll();
+    const usersSerialized = users.map(user => serializedUser(user));
 
-    res.json(users);
+    res.json(usersSerialized);
   } catch (e) {
     console.log(e);
     res

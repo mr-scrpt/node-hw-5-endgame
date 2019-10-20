@@ -4,34 +4,8 @@ const serializedUser = require("../lib/serializedUser");
 const db = require("../models/db");
 
 module.exports = async (req, res) => {
-  const accessToken = req.headers["authorization"];
+  const user = serializedUser(await db.userGetOneById(req.user.id));
+  console.log(user);
 
-  try {
-    const { id } = await tokenDecoder(accessToken, secretToken);
-    const user = serializedUser(await db.userGetOneById(id));
-
-    res.json(user);
-  } catch (e) {
-    console.error(e.message);
-  }
-
-  //const user = await db.userGetOneById(decode.id);
-
-  //console.log(decode);
-
-  /* return{
-    
-      firstName:,
-      id:,
-      image:,
-      middleName: ,
-      permission: {},
-      surName: ,
-      username: ,
-  
-      accessToken: ,
-      refreshToken:,
-      accessTokenExpiredAt: ,
-      refreshTokenExpiredAt: 
-  } */
+  res.json(user);
 };
