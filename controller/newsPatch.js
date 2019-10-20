@@ -4,9 +4,7 @@ const newPatch = async (req, res) => {
 
   if (id) {
     const { text, title } = req.body;
-
     const news = { id: id, text, title };
-    console.log(news);
 
     try {
       const changedNews = await db.newsChange(news);

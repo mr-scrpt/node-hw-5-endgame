@@ -8,6 +8,7 @@ module.exports = async (req, res) => {
     const currentUser = await db.userGetOneById(user.id);
 
     const changedData = req.body;
+
     changedData.image = req.filePath
       ? `//${req.get("host")}/${req.filePath}`
       : null;
