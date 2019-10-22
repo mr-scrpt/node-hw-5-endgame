@@ -10,3 +10,4 @@ module.exports.newsGet = require("./newsGet");
 module.exports.newsPost = require("./newsPost");
 module.exports.newsPatch = require("./newsPatch");
 module.exports.newsDelete = require("./newsDelete");
+module.exports.chat = require("./chat");
