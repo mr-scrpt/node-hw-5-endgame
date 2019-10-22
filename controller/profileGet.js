@@ -4,7 +4,9 @@ const serializedUser = require("../lib/serializedUser");
 const db = require("../models/db");
 
 module.exports = async (req, res) => {
-  const user = serializedUser(await db.userGetOneById(req.user.id));
+  /*  const user = serializedUser(await db.userGetOneById(req.user.id));*/
+  const user = await db.userGetOneById(req.user.id);
+  console.log(user._id);
 
   res.json(user);
 };
