@@ -1,13 +1,16 @@
 const mongoose = require("mongoose");
-
+const dbUrl =
+  process.env.MODE === "dev"
+    ? process.env.BD_HOST_DEV
+    : process.env.BD_HOST_PROD;
 mongoose.Promise = global.Promise;
 
-mongoose.connect(process.env.BD_HOST, {
+mongoose.connect(dbUrl, {
   useNewUrlParser: true
 });
 
 mongoose.connection.on("connected", () => {
-  console.log(`Mongoose connection open ${process.env.BD_HOST}`);
+  console.log(`Mongoose connection open ${dbUrl}`);
 });
 
 mongoose.connection.on("error", err => {

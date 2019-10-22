@@ -9,7 +9,9 @@ const logger = require("morgan");
 
 require("./models");
 
+//require("./socket/chat");
 const app = express();
+
 app.use(helmet());
 app.use(logger("dev"));
 app.use(express.json());
@@ -27,6 +29,7 @@ app.use(function(req, res, next) {
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/v1.0", require("./routes/api/v1.0"));
+//app.use("/chat", require("./routes/chat"));
 
 app.use("*", (req, res) => {
   res.sendFile(path.resolve(process.cwd(), "public/index.html"));
