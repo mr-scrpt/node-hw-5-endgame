@@ -6,23 +6,17 @@ module.exports = io => {
         username: userConnect.username,
         id: sck.id
       };
-      users.add({
-        [sck.id]: userNew
-      });
-      console.log(users);
+      users.add(userNew);
+      console.log([...users]);
 
       sck.emit("users:list", [...users]);
 
-      /* sck.emit("users:add", () => {
-        sck.broadcast.send(userNew);
-      });
+      sck.broadcast.emit("users:add", userNew);
 
       sck.on("disconnect", userDisconnect => {
-        sck.emit("users:leave", () => {
-          users.delete(userNew);
-          sck.broadcast.send(userNew.id);
-        });
-      }); */
+        sck.broadcast.emit("users:leave", userNew.id);
+        users.delete(userNew);
+      });
     });
   });
 };

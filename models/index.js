@@ -4,6 +4,8 @@ const dbUrl =
     ? process.env.BD_HOST_DEV
     : process.env.BD_HOST_PROD;
 mongoose.Promise = global.Promise;
+console.log(222);
+console.log(dbUrl);
 
 mongoose.connect(dbUrl, {
   useNewUrlParser: true
