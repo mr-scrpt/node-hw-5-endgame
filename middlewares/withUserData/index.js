@@ -10,7 +10,11 @@ module.exports.withUserData = async (req, res, next) => {
 
       req.user = user;
     } catch (e) {
-      console.error(e);
+      console.error(e.message);
+      res.status(400).json({
+        status: 400,
+        message: "Неудалось получить ключ польлзователя"
+      });
     }
   }
 

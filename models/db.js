@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 const { Users } = require("./schema/user");
 const { News } = require("./schema/news");
-
+const { Token } = require("./schema/token");
+const dateGen = require("../lib/dateGen");
 module.exports.userAdd = ({
   username,
   firstName,
@@ -93,4 +94,32 @@ module.exports.newsChange = news => {
 
 module.exports.newsDelete = id => {
   return News.findByIdAndRemove({ _id: id });
+};
+
+module.exports.tokenAdd = (refreshToken, accessToken) => {
+  const tokenData = new Token({
+    tokenAccess: {
+      body: accessToken,
+      expireDate: dateGen(process.env.token_main_life)
+    },
+    tokenRefresh: {
+      body: refreshToken,
+      expireDate: dateGen(process.env.token_refresh_life)
+    }
+  });
+  tokenData.save();
+};
+
+module.exports.tokenGet = tokenRefresh => {
+  return Token.findOne({ "tokenRefresh.body": tokenRefresh });
+};
+module.exports.tokenDeleteOne = tokenRefresh => {
+  return Token.deleteOne({ "tokenRefresh.body": tokenRefresh });
+};
+
+module.exports.tokenDelAllExpired = expired => {
+  return Token.find()
+    .where("tokenRefresh.expireDate")
+    .lt(expired)
+    .remove();
 };
