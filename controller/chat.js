@@ -7,11 +7,20 @@ module.exports = io => {
         id: sck.id
       };
       users.add(userNew);
-      console.log([...users]);
 
       sck.emit("users:list", [...users]);
 
       sck.broadcast.emit("users:add", userNew);
+
+      sck.on("message:add", msg => {
+        //sck.broadcast.to(msg.roomId).emit("message:add", userNew.id, msg.text);
+        //io.to(data.roomId).emit('message:add', data, socketId);
+        //io.to(msg.roomId).emit("message:add", msg, sck.id);
+        //sck.to(msg.roomId).emit("message:add", msg, userConnect.id);
+        //io.to(msg.roomId).emit("message:add", msg, userConnect.id);
+        //io.to(msg.roomId).emit("message:add", msg, sck.id);
+        sck.broadcast.to(msg.roomId).emit("message:add", msg, sck.id);
+      });
 
       sck.on("disconnect", userDisconnect => {
         sck.broadcast.emit("users:leave", userNew.id);

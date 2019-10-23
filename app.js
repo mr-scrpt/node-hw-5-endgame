@@ -8,7 +8,7 @@ const helmet = require("helmet");
 const logger = require("morgan");
 
 require("./models");
-
+require("./lib/tokenAutoCleaner");
 //require("./socket/chat");
 const app = express();
 

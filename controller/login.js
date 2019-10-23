@@ -1,11 +1,11 @@
 const db = require("../models/db");
 const tokenGenerator = require("../lib/tokenGenerator");
 const tokenSetData = require("../lib/tokenSetData");
-
 const { validCrypto } = require("../lib/crypto");
 const serializedUser = require("../lib/serializedUser");
+
 module.exports = async (req, res) => {
-  const { username, password } = req.body; //????????????????
+  const { username, password } = req.body;
   try {
     const user = await db.userGetOneByUserName(username);
     const etalonPassword = user.password;
@@ -13,8 +13,10 @@ module.exports = async (req, res) => {
     if (validCrypto(password, etalonPassword)) {
       const userSerialized = serializedUser(user);
       const { token, refreshToken } = tokenGenerator(userSerialized);
-      const tokenData = tokenSetData(token, refreshToken);
 
+      await db.tokenAdd(refreshToken, token);
+
+      const tokenData = tokenSetData(token, refreshToken);
       res.json({ ...userSerialized, ...tokenData });
     } else {
       res
