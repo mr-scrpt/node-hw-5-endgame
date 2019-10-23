@@ -10,8 +10,16 @@ router.patch(
   "/",
 
   uploader.single("avatar"),
-  imgOptimizer,
+  //imgOptimizer,
   withUserData,
   controllers.profilePatch
 );
+/* router.patch(
+  "/",
+
+  () => {
+    console.log("profile patch!!!");
+  }
+); */
+
 module.exports = router;
