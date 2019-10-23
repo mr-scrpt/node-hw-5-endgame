@@ -1,7 +1,6 @@
 const db = require("../models/db");
 const newDelete = async (req, res) => {
   const { id } = req.params;
-  console.log(id);
 
   if (id) {
     try {

@@ -9,6 +9,7 @@ const lifeRefresh = process.env.token_refresh_life;
 
 module.exports = async (req, res) => {
   const refreshToken = req.headers["authorization"];
+
   const {
     tokenRefresh: { body: tokenExistsInBd }
   } = await db.tokenGet(refreshToken);

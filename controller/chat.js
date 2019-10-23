@@ -39,15 +39,3 @@ module.exports = io => {
     });
   });
 };
-
-const obj = {
-  id1: {
-    username: "username1",
-    id: "id1"
-  },
-  id2: {
-    username: "username2",
-    id: "id2"
-  }
-};
-console.log(obj);

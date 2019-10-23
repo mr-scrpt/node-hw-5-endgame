@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
   try {
     const user = req.user;
     const currentUser = await db.userGetOneById(user.id);
-
+    console.log(currentUser);
     const changedData = req.body;
 
     changedData.image = req.filePath

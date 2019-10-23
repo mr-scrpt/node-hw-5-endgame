@@ -8,10 +8,11 @@ const newPatch = async (req, res) => {
 
     try {
       const changedNews = await db.newsChange(news);
+
       const allNews = await db.newsGetAll();
       res.json(allNews);
     } catch (e) {
-      console.log(e);
+      console.log(e.message);
       res
         .status(400)
         .json({ status: 400, message: "Неудалось изменить новость!" });
